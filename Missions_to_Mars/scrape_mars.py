@@ -6,8 +6,9 @@ import pandas as pd
 import time
 
 def init_browser():
-    executable_path = {'executable_path': ChromeDriverManager().install()}
-    return Browser('chrome', **executable_path, headless=False)
+    #executable_path = {'executable_path': ChromeDriverManager().install()}
+    executable_path = {"executable_path": "chromedriver.exe"}
+    return Browser("chrome", **executable_path, headless=False)
 
 def scrape():
     browser = init_browser()
@@ -26,7 +27,7 @@ def scrape():
     all_paragraph = soup.find_all(name='div', class_='article_teaser_body')
     news_p = all_paragraph[0].text.strip()
 
-    #Featured Image
+    #JPL Mars Space Images
     url = 'https://www.jpl.nasa.gov/spaceimages/?search=&category=Mars'
     browser.visit(url)
 
@@ -69,10 +70,10 @@ def scrape():
         title = x.find('h3').text
     
         #pull partial img url from main page
-        partial_img_url = x.find('a', class_='itemLink product-item')['href']
+        partial_image_url = x.find('a', class_='itemLink product-item')['href']
     
         #Go to link that has the full image
-        browser.visit(main_url + partial_img_url)
+        browser.visit(main_url + partial_image_url)
     
         #Create new soup
         soup = bs(browser.html, 'html.parser')
@@ -83,15 +84,15 @@ def scrape():
         #Append the img names and links to a list of dicts
         hempishere_image_urls.append({"titles": title, "img_url": img_url})
 
-
-    mars_dict = {
-        'news_title': news_title,
-        'news_p': news_p,
-        'featured_image': featured_image_url,
-        'mars_facts': mars_df,
-        'titles': title,
-        'img_url': img_url
-    }
+        #store data in dictionary
+        mars_dict = {
+            'news_title': news_title,
+            'news_paragraph': news_p,
+            'featured_image': featured_image_url,
+            'mars_facts': mars_df,
+            'titles': title,
+            'image_url': img_url
+        }
 
     browser.quit()
     
