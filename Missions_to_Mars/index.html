@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Mission to Mars</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+
+<body>
+  <div class="container">
+
+    <div class="jumbotron text-center">
+      <h1>Mission to Mars</h1>
+      <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data</a></p>
+    </div>
+
+    <div class="row" id="mars-news">
+      <div class="col-md-12">
+        <h3>Latest Mars News</h3>
+        <h4 class="heading">{{mars_dict.news_title}}</h4>
+        <p>{{mars_dict.news_p}}</p>
+      </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <h3>Featured Image</h3>
+            <img src="{{ mars_dict.featured_image }}" width="600px", height="400px">
+        </div>
+        <div class="col-md-4">
+            <h4>Mars Facts</h4>
+            <div style="width: 450px; height: 200px; font-size: 15px; margin-bottom: 65px">
+              {{ mars_dict.mars_facts | safe }}
+            </div>
+        </div>
+    </div>
+
+    <div class = "card-deck">
+      <div class="col-md-12">
+        <div class="row">
+          {% for mars in mars_dict %}
+          <div class="col-md-6">
+            <div class="card">
+              <img class="card-img-top" src="{{mars.img_url}}" alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title">{{mars.titles}}</h5>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    
+</div>
+  
+</body>
+
+</html>
