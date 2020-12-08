@@ -6,9 +6,8 @@ import pandas as pd
 import time
 
 def init_browser():
-    #executable_path = {'executable_path': ChromeDriverManager().install()}
-    executable_path = {"executable_path": "chromedriver.exe"}
-    return Browser("chrome", **executable_path, headless=False)
+    executable_path = {'executable_path': ChromeDriverManager().install()}
+    return Browser("chrome", **executable_path, headless=True)
 
 def scrape():
     browser = init_browser()
@@ -16,7 +15,6 @@ def scrape():
     url = "https://mars.nasa.gov/news"
     browser.visit(url)
 
-    #time.sleep(1) is this needed?
 
     #scrape page into soup
     soup = bs(browser.html, "html.parser")
@@ -85,21 +83,18 @@ def scrape():
     
         #Append the img names and links to a list of dicts
         hemisphere_dict = {"titles": title, "img_url": img_url}
+        
         hemisphere_image_urls.append(hemisphere_dict)
 
-
-        #store data in dictionary
-        mars_dict = {
-            'news_title': news_title,
-            'news_paragraph': news_p,
-            'featured_image': featured_image_url,
-            'mars_facts': mars_df,
-            'hemisphere_image_urls': hemisphere_image_urls
-        }
-
-
+     #store data in dictionary
+    mars_dict = {
+        'news_title': news_title,
+        'news_paragraph': news_p,
+        'featured_image': featured_image_url,
+        'mars_facts': mars_df,
+        'hemisphere_image_urls': hemisphere_image_urls
+    }
 
     browser.quit()
     
-    #print(mars_dict)
     return mars_dict
