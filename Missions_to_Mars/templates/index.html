@@ -26,11 +26,11 @@
     </div>
 
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-6">
             <h3>Featured Image</h3>
             <img src="{{ mars_dict.featured_image }}" width="600px", height="400px">
         </div>
-        <div class="col-md-4">
+        <div class="col-md-6">
             <h4>Mars Facts</h4>
             <div style="width: 450px; height: 200px; font-size: 15px; margin-bottom: 65px">
               {{ mars_dict.mars_facts | safe }}
@@ -38,22 +38,22 @@
         </div>
     </div>
 
-    <!-- <div class = "card-deck">
-      <div class="col-md-12">
+    <div class = "card-deck">
+      <div class="col-md-11">
         <div class="row">
-          {% for mars in mars_dict %}
+          {% for hemisphere_dict in mars_dict.hemisphere_image_urls %}
           <div class="col-md-6">
             <div class="card">
-              <img class="card-img-top" src="{{mars.image_url}}" alt="Card image cap">
+              <img class="card-img-top" src="{{mars_dict.img_url}}" alt="Card image cap">
               <div class="card-body">
-                <h5 class="card-title">{{mars.titles}}</h5>
+                <h5 class="card-title">{{mars_dict.titles}}</h5>
               </div>
             </div>
           </div>
           {% endfor %}
         </div>
       </div>
-    </div> -->
+    </div>
     
 </div>
   

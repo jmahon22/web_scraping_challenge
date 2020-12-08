@@ -59,13 +59,15 @@ def scrape():
     items = soup.find_all(name='div', class_='item')
 
     #Create empty list
-    hempishere_image_urls = []
+    hemisphere_image_urls = []
 
     #Store main url
     main_url = 'https://astrogeology.usgs.gov'
 
     #Create loop
     for x in items:
+
+        hemisphere_dict = {}
         #find titles
         title = x.find('h3').text
     
@@ -82,7 +84,9 @@ def scrape():
         img_url = main_url + soup.find('img', class_='wide-image')['src']
     
         #Append the img names and links to a list of dicts
-        hempishere_image_urls.append({"titles": title, "img_url": img_url})
+        hemisphere_dict = {"titles": title, "img_url": img_url}
+        hemisphere_image_urls.append(hemisphere_dict)
+
 
         #store data in dictionary
         mars_dict = {
@@ -90,9 +94,10 @@ def scrape():
             'news_paragraph': news_p,
             'featured_image': featured_image_url,
             'mars_facts': mars_df,
-            'titles': title,
-            'image_url': img_url
+            'hemisphere_image_urls': hemisphere_image_urls
         }
+
+
 
     browser.quit()
     
