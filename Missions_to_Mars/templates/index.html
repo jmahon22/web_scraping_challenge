@@ -38,14 +38,16 @@
         </div>
     </div>
 
-    <div class = "card-deck" style="display: flex;">
+    <h3 style="padding-top: 10px; padding-bottom: 5px; text-align: center;">Hemispheres</h3>
+    <hr>
+    <div class = "card-deck">
       <div class="col-md-12">
         <div class="row">
-          {% for hemisphere_dict in mars_dict.hempishere_image_urls %}
-          <div class="col-md-6">
-            <div class="card">
+          {% for hemisphere_dict in mars_dict.hemisphere_image_urls %}
+          <div class="col-md-3">
+            <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
               <a href="{{hemisphere_dict.img_url}}">
-                <img class="card-img-top" src="{{hemisphere_dict.img_url}}" alt="Card image cap">
+                <img class="card-img-top" src="{{hemisphere_dict.img_url}}" alt="Card image cap" style='width: 200px; height: 200px; align-content: center;'>
               </a>
               <div class="card-body">
                 <h5 class="card-title">{{hemisphere_dict.titles}}</h5>
