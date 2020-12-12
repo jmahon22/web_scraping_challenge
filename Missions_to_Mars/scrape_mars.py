@@ -15,13 +15,14 @@ def scrape():
     url = "https://mars.nasa.gov/news"
     browser.visit(url)
 
-
     #scrape page into soup
     soup = bs(browser.html, "html.parser")
 
+    #titles
     all_titles = soup.find_all(name='div', class_='content_title')
     news_title = all_titles[1].text.strip()
 
+    #paragraph
     all_paragraph = soup.find_all(name='div', class_='article_teaser_body')
     news_p = all_paragraph[0].text.strip()
 
@@ -45,7 +46,6 @@ def scrape():
     df = tables[0]
 
     mars_df = df.to_html(classes= 'dataframe')
-
 
     #Mars Hemispheres
 
